@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.XinwenMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Xinwen">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="biaoti" property="biaoti" jdbcType="VARCHAR"/>
+                                    <result column="fenlei" property="fenlei" jdbcType="VARCHAR"/>
+                                    <result column="tupian" property="tupian" jdbcType="VARCHAR"/>
+                                    <result column="tianjiaren" property="tianjiaren" jdbcType="VARCHAR"/>
+                                    <result column="dianjilv" property="dianjilv" jdbcType="INTEGER"/>
+                                    <result column="neirong" property="neirong" jdbcType="VARCHAR"/>
+                                    <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+                                
+    </resultMap>
+
+    <sql id="table">
+        xinwen    </sql>
+    <sql id="Base_Column_List">
+        id, biaoti, fenlei, tupian, tianjiaren, dianjilv, neirong, addtime    </sql>
+    
+
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Xinwen">
+        SELECT * FROM
+        <include refid="table"/>
+        where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="com.spring.entity.Xinwen">
+        DELETE FROM
+        <include refid="table"/>
+        where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.spring.entity.Xinwen">
+        UPDATE
+        <include refid="table"/>
+        <set>
+                        <if test="biaoti != null">
+                biaoti = #{biaoti},
+            </if>
+                        <if test="fenlei != null">
+                fenlei = #{fenlei},
+            </if>
+                        <if test="tupian != null">
+                tupian = #{tupian},
+            </if>
+                        <if test="tianjiaren != null">
+                tianjiaren = #{tianjiaren},
+            </if>
+                        <if test="dianjilv != null">
+                dianjilv = #{dianjilv},
+            </if>
+                        <if test="neirong != null">
+                neirong = #{neirong},
+            </if>
+                        <if test="addtime != null">
+                addtime = #{addtime},
+            </if>
+                    </set>
+        where id = #{id}
+    </update>
+        <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Xinwen">
+        INSERT INTO
+        <include refid="table"/>
+        ( biaoti , fenlei , tupian , tianjiaren , dianjilv , neirong , addtime ) values( #{biaoti} , #{fenlei} , #{tupian} , #{tianjiaren} , #{dianjilv} , #{neirong} , #{addtime} )
+    </insert>
+
+</mapper>

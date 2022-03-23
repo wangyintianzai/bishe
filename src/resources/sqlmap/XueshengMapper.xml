@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.XueshengMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Xuesheng">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="xuehao" property="xuehao" jdbcType="VARCHAR"/>
+                                    <result column="mima" property="mima" jdbcType="VARCHAR"/>
+                                    <result column="touxiang" property="touxiang" jdbcType="VARCHAR"/>
+                                    <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+                                    <result column="xingbie" property="xingbie" jdbcType="VARCHAR"/>
+                                    <result column="shouji" property="shouji" jdbcType="VARCHAR"/>
+                                    <result column="xueyuan" property="xueyuan" jdbcType="VARCHAR"/>
+                                    <result column="banji" property="banji" jdbcType="VARCHAR"/>
+                                    <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+                                
+    </resultMap>
+
+    <sql id="table">
+        xuesheng    </sql>
+    <sql id="Base_Column_List">
+        id, xuehao, mima, touxiang, xingming, xingbie, shouji, xueyuan, banji, addtime    </sql>
+        <select id="login" resultMap="BaseResultMap" parameterType="com.spring.entity.Xuesheng">
+        select
+        <include refid="Base_Column_List"/>
+        from <include refid="table"/>
+        where xuehao = #{xuehao}
+        AND mima = #{mima}
+    </select>
+    
+
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Xuesheng">
+        SELECT * FROM
+        <include refid="table"/>
+        where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="com.spring.entity.Xuesheng">
+        DELETE FROM
+        <include refid="table"/>
+        where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.spring.entity.Xuesheng">
+        UPDATE
+        <include refid="table"/>
+        <set>
+                        <if test="xuehao != null">
+                xuehao = #{xuehao},
+            </if>
+                        <if test="mima != null">
+                mima = #{mima},
+            </if>
+                        <if test="touxiang != null">
+                touxiang = #{touxiang},
+            </if>
+                        <if test="xingming != null">
+                xingming = #{xingming},
+            </if>
+                        <if test="xingbie != null">
+                xingbie = #{xingbie},
+            </if>
+                        <if test="shouji != null">
+                shouji = #{shouji},
+            </if>
+                        <if test="xueyuan != null">
+                xueyuan = #{xueyuan},
+            </if>
+                        <if test="banji != null">
+                banji = #{banji},
+            </if>
+                        <if test="addtime != null">
+                addtime = #{addtime},
+            </if>
+                    </set>
+        where id = #{id}
+    </update>
+        <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Xuesheng">
+        INSERT INTO
+        <include refid="table"/>
+        ( xuehao , mima , touxiang , xingming , xingbie , shouji , xueyuan , banji , addtime ) values( #{xuehao} , #{mima} , #{touxiang} , #{xingming} , #{xingbie} , #{shouji} , #{xueyuan} , #{banji} , #{addtime} )
+    </insert>
+
+</mapper>

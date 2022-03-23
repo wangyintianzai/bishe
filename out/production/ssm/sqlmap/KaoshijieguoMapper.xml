@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.KaoshijieguoMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Kaoshijieguo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="chufangyuyueid" property="chufangyuyueid" jdbcType="INTEGER"/>
+                                    <result column="yuyuebianhao" property="yuyuebianhao" jdbcType="VARCHAR"/>
+                                    <result column="yuyueren" property="yuyueren" jdbcType="VARCHAR"/>
+                                    <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+                                    <result column="biaoti" property="biaoti" jdbcType="VARCHAR"/>
+                                    <result column="leixing" property="leixing" jdbcType="VARCHAR"/>
+                                    <result column="daan" property="daan" jdbcType="VARCHAR"/>
+                                    <result column="defen" property="defen" jdbcType="INTEGER"/>
+                                    <result column="zimu" property="zimu" jdbcType="VARCHAR"/>
+                                    <result column="wenjuanren" property="wenjuanren" jdbcType="VARCHAR"/>
+                                    <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+                                
+    </resultMap>
+
+    <sql id="table">
+        kaoshijieguo    </sql>
+    <sql id="Base_Column_List">
+        id, chufangyuyueid, yuyuebianhao, yuyueren, xingming, biaoti, leixing, daan, defen, zimu, wenjuanren, addtime    </sql>
+    
+
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Kaoshijieguo">
+        SELECT * FROM
+        <include refid="table"/>
+        where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="com.spring.entity.Kaoshijieguo">
+        DELETE FROM
+        <include refid="table"/>
+        where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.spring.entity.Kaoshijieguo">
+        UPDATE
+        <include refid="table"/>
+        <set>
+                        <if test="chufangyuyueid != null">
+                chufangyuyueid = #{chufangyuyueid},
+            </if>
+                        <if test="yuyuebianhao != null">
+                yuyuebianhao = #{yuyuebianhao},
+            </if>
+                        <if test="yuyueren != null">
+                yuyueren = #{yuyueren},
+            </if>
+                        <if test="xingming != null">
+                xingming = #{xingming},
+            </if>
+                        <if test="biaoti != null">
+                biaoti = #{biaoti},
+            </if>
+                        <if test="leixing != null">
+                leixing = #{leixing},
+            </if>
+                        <if test="daan != null">
+                daan = #{daan},
+            </if>
+                        <if test="defen != null">
+                defen = #{defen},
+            </if>
+                        <if test="zimu != null">
+                zimu = #{zimu},
+            </if>
+                        <if test="wenjuanren != null">
+                wenjuanren = #{wenjuanren},
+            </if>
+                        <if test="addtime != null">
+                addtime = #{addtime},
+            </if>
+                    </set>
+        where id = #{id}
+    </update>
+        <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Kaoshijieguo">
+        INSERT INTO
+        <include refid="table"/>
+        ( chufangyuyueid , yuyuebianhao , yuyueren , xingming , biaoti , leixing , daan , defen , zimu , wenjuanren , addtime ) values( #{chufangyuyueid} , #{yuyuebianhao} , #{yuyueren} , #{xingming} , #{biaoti} , #{leixing} , #{daan} , #{defen} , #{zimu} , #{wenjuanren} , #{addtime} )
+    </insert>
+
+</mapper>

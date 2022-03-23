@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.LunbotuMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Lunbotu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="title" property="title" jdbcType="VARCHAR"/>
+                                    <result column="image" property="image" jdbcType="VARCHAR"/>
+                                    <result column="url" property="url" jdbcType="VARCHAR"/>
+                                
+    </resultMap>
+
+    <sql id="table">
+        lunbotu    </sql>
+    <sql id="Base_Column_List">
+        id, title, image, url    </sql>
+    
+
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Lunbotu">
+        SELECT * FROM
+        <include refid="table"/>
+        where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="com.spring.entity.Lunbotu">
+        DELETE FROM
+        <include refid="table"/>
+        where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.spring.entity.Lunbotu">
+        UPDATE
+        <include refid="table"/>
+        <set>
+                        <if test="title != null">
+                title = #{title},
+            </if>
+                        <if test="image != null">
+                image = #{image},
+            </if>
+                        <if test="url != null">
+                url = #{url},
+            </if>
+                    </set>
+        where id = #{id}
+    </update>
+        <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Lunbotu">
+        INSERT INTO
+        <include refid="table"/>
+        ( title , image , url ) values( #{title} , #{image} , #{url} )
+    </insert>
+
+</mapper>

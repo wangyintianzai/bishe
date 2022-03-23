@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.ChufangjielunMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Chufangjielun">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="chufangyuyueid" property="chufangyuyueid" jdbcType="INTEGER"/>
+                                    <result column="yuyuebianhao" property="yuyuebianhao" jdbcType="VARCHAR"/>
+                                    <result column="yuyueren" property="yuyueren" jdbcType="VARCHAR"/>
+                                    <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+                                    <result column="zongdefen" property="zongdefen" jdbcType="DECIMAL"/>
+                                    <result column="chufangyuan" property="chufangyuan" jdbcType="VARCHAR"/>
+                                    <result column="weijidengji" property="weijidengji" jdbcType="VARCHAR"/>
+                                    <result column="wentileixing" property="wentileixing" jdbcType="VARCHAR"/>
+                                    <result column="chufangshijian" property="chufangshijian" jdbcType="VARCHAR"/>
+                                    <result column="chufangjielun" property="chufangjielun" jdbcType="VARCHAR"/>
+                                    <result column="beizhu" property="beizhu" jdbcType="VARCHAR"/>
+                                    <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+                                
+    </resultMap>
+
+    <sql id="table">
+        chufangjielun    </sql>
+    <sql id="Base_Column_List">
+        id, chufangyuyueid, yuyuebianhao, yuyueren, xingming, zongdefen, chufangyuan, weijidengji, wentileixing, chufangshijian, chufangjielun, beizhu, addtime    </sql>
+    
+
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM
+        <include refid="table"/>
+        <where>
+            ${where}
+        </where>
+        <if test="order != null">
+            order by ${order}
+        </if>
+    </select>
+
+
+
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Chufangjielun">
+        SELECT * FROM
+        <include refid="table"/>
+        where id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="com.spring.entity.Chufangjielun">
+        DELETE FROM
+        <include refid="table"/>
+        where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.spring.entity.Chufangjielun">
+        UPDATE
+        <include refid="table"/>
+        <set>
+                        <if test="chufangyuyueid != null">
+                chufangyuyueid = #{chufangyuyueid},
+            </if>
+                        <if test="yuyuebianhao != null">
+                yuyuebianhao = #{yuyuebianhao},
+            </if>
+                        <if test="yuyueren != null">
+                yuyueren = #{yuyueren},
+            </if>
+                        <if test="xingming != null">
+                xingming = #{xingming},
+            </if>
+                        <if test="zongdefen != null">
+                zongdefen = #{zongdefen},
+            </if>
+                        <if test="chufangyuan != null">
+                chufangyuan = #{chufangyuan},
+            </if>
+                        <if test="weijidengji != null">
+                weijidengji = #{weijidengji},
+            </if>
+                        <if test="wentileixing != null">
+                wentileixing = #{wentileixing},
+            </if>
+                        <if test="chufangshijian != null">
+                chufangshijian = #{chufangshijian},
+            </if>
+                        <if test="chufangjielun != null">
+                chufangjielun = #{chufangjielun},
+            </if>
+                        <if test="beizhu != null">
+                beizhu = #{beizhu},
+            </if>
+                        <if test="addtime != null">
+                addtime = #{addtime},
+            </if>
+                    </set>
+        where id = #{id}
+    </update>
+        <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Chufangjielun">
+        INSERT INTO
+        <include refid="table"/>
+        ( chufangyuyueid , yuyuebianhao , yuyueren , xingming , zongdefen , chufangyuan , weijidengji , wentileixing , chufangshijian , chufangjielun , beizhu , addtime ) values( #{chufangyuyueid} , #{yuyuebianhao} , #{yuyueren} , #{xingming} , #{zongdefen} , #{chufangyuan} , #{weijidengji} , #{wentileixing} , #{chufangshijian} , #{chufangjielun} , #{beizhu} , #{addtime} )
+    </insert>
+
+</mapper>
